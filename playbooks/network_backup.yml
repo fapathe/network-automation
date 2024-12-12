@@ -35,7 +35,7 @@
 
     - name: Create a directory if it does not exist
       ansible.builtin.file:
-        path: /home/base/backup/
+        path: /backup/
         state: directory
         mode: "755"
       delegate_to: backup-server
@@ -45,7 +45,7 @@
     - name: Save configuration to backup server
       ansible.builtin.copy:
         src: "{{ config_output.backup_path }}"
-        dest: "/home/base/backup/{{ hostvars['backup-server'].datetime }}/"
+        dest: "/backup/{{ hostvars['backup-server'].datetime }}/"
         mode: "644"
       when: config_output is defined
       become: true
@@ -53,7 +53,7 @@
 
     - name: Find backups
       ansible.builtin.find:
-        paths: /home/base/backup
+        paths: /backup
         file_type: directory
       register: backups
       run_once: true
