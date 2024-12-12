@@ -53,7 +53,7 @@
 
     - name: Find backups
       ansible.builtin.find:
-        paths: /backup
+        paths: /home/base/backup
         file_type: directory
       register: backups
       run_once: true
